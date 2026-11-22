@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Warm cream used as the app-wide screen background (matches iOS 0.96 / 0.94 / 0.90). -->
+    <color name="finora_background">#F5F0E6</color>
+</resources>
