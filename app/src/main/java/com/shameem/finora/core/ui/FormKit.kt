@@ -300,7 +300,7 @@ fun LogoColorPickerCard(
                 )
             }
         }
-        HorizontalDivider(color = FinoraColors.Hairline)
+        HorizontalDivider(color = FinoraColors.Divider)
         SectionLabel("Colour")
         ColorSwatchPicker(hex = tintHex, onHexChange = onTintChange)
     }

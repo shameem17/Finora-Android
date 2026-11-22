@@ -2,6 +2,8 @@ package com.shameem.finora.services.persistence
 
 import androidx.room.withTransaction
 import com.shameem.finora.core.data.ChangeNotifying
+import com.shameem.finora.core.data.DeferrableSignal
+import com.shameem.finora.core.data.notifyAfterCommit
 import com.shameem.finora.screens.home.model.Account
 import com.shameem.finora.screens.transaction.AccountRepository
 import com.shameem.finora.screens.transaction.Transfer
@@ -12,16 +14,18 @@ import kotlinx.coroutines.flow.asSharedFlow
 import java.util.UUID
 
 /**
- * Backs a repository's `changes` stream. Emits after a write commits (never from inside the
- * transaction), so observers always re-read stored truth. Drops nothing: `tryEmit` with an extra
- * buffer never suspends the writer.
+ * Backs a repository's `changes` stream. Emits after a write commits; inside a unit of work the emission
+ * is held until the outermost transaction commits, so observers always re-read stored truth.
  */
-internal class ChangeSignal : ChangeNotifying {
+internal class ChangeSignal : ChangeNotifying, DeferrableSignal {
     private val subject = MutableSharedFlow<Unit>(extraBufferCapacity = 16)
     override val changes: Flow<Unit> = subject.asSharedFlow()
-    fun notifyChanged() {
+
+    override fun emitNow() {
         subject.tryEmit(Unit)
     }
+
+    suspend fun notifyChanged() = notifyAfterCommit(this)
 }
 
 class RoomAccountRepository(

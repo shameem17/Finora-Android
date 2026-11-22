@@ -26,6 +26,9 @@ object FinoraColors {
     val FillSubtle = BrandSecondary.copy(alpha = 0.07f)
     val Hairline = BrandSecondary.copy(alpha = 0.08f)
 
+    /** iOS system separator, used by `Divider()`. */
+    val Divider = Color(0x4A545458)
+
     // Text and icons
     val TextPrimary = BrandSecondary
     val TextSecondary = BrandSecondary.copy(alpha = 0.65f)

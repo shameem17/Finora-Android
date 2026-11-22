@@ -168,7 +168,7 @@ fun DonutCard(
             }
         }
 
-        HorizontalDivider(color = FinoraColors.Hairline)
+        HorizontalDivider(color = FinoraColors.Divider)
 
         Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
             items.forEach { item ->
