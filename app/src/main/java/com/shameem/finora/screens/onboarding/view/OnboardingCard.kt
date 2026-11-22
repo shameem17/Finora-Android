@@ -92,8 +92,8 @@ private fun NextRow(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
-        // Dark capsule sitting on a yellow capsule offset 4dp down/right: the "3D" button.
-        val accent = FinoraColors.OnboardingAccent
+        // Teal capsule sitting on a tangerine capsule offset 4dp down/right: the "3D" button.
+        val accent = FinoraColors.BrandAccent
         Box(
             modifier = Modifier
                 .shadow(
@@ -126,7 +126,7 @@ private fun NextRow(
         AppText(
             text = data.shortNote,
             size = 12,
-            color = FinoraColors.CustomBlack,
+            color = FinoraColors.BrandSecondary,
             textAlign = TextAlign.End,
             maxLines = 2,
             modifier = Modifier

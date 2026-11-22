@@ -85,7 +85,8 @@ fun OnboardingScreen(
         }
 
         SkipButton(
-            onClick = model::skip,
+            // Matches iOS: the "Skip" pill advances one page (it calls `next()`), it does not leave onboarding.
+            onClick = model::next,
             modifier = Modifier
                 .align(Alignment.TopEnd)
                 .padding(top = WindowInsets.statusBars.asPaddingValues().calculateTopPadding() + 12.dp)
@@ -102,7 +103,7 @@ private fun SkipButton(
     Box(
         modifier = modifier
             .clip(CircleShape)
-            .background(FinoraColors.SkipButton)
+            .background(FinoraColors.BrandSecondary)
             .clickable(role = Role.Button, onClick = onClick)
             .padding(horizontal = 16.dp, vertical = 5.dp),
     ) {

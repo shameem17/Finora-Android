@@ -47,6 +47,7 @@ private val table: Map<String, SymbolIcons> by lazy {
         "car" to SymbolIcons(Icons.Outlined.DirectionsCar, Icons.Filled.DirectionsCar),
         "cart" to SymbolIcons(Icons.Outlined.ShoppingCart, Icons.Filled.ShoppingCart),
         "chart.line.uptrend.xyaxis" to SymbolIcons(Icons.Outlined.ShowChart, Icons.Filled.ShowChart),
+        "chevron.right" to SymbolIcons(Icons.Outlined.ChevronRight, Icons.Filled.ChevronRight),
         "checkmark" to SymbolIcons(Icons.Outlined.Check, Icons.Filled.Check),
         "checkmark.circle" to SymbolIcons(Icons.Outlined.CheckCircle, Icons.Filled.CheckCircle),
         "checkmark.seal" to SymbolIcons(Icons.Outlined.Verified, Icons.Filled.Verified),

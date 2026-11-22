@@ -42,7 +42,7 @@ class AppCoordinator(private val dependencies: AppDependencies) : Coordinator {
         ) { onboarded ->
             when (onboarded) {
                 // Still reading the persisted flag; the system splash screen covers this.
-                null -> Box(Modifier.fillMaxSize().background(FinoraColors.Background))
+                null -> Box(Modifier.fillMaxSize().background(FinoraColors.ScreenBackground))
                 false -> onboardingCoordinator.Start()
                 true -> mainCoordinator.Start()
             }
