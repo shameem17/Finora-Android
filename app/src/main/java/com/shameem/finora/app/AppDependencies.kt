@@ -2,6 +2,7 @@ package com.shameem.finora.app
 
 import android.content.Context
 import com.shameem.finora.core.data.UnitOfWork
+import com.shameem.finora.screens.categories.repository.CategoryRepository
 import com.shameem.finora.screens.transaction.AccountRepository
 import com.shameem.finora.screens.transaction.TransferRepository
 import com.shameem.finora.services.date.DateService
@@ -21,4 +22,5 @@ interface AppDependencies {
     // Shared singletons: several features read and move money through these.
     val accountRepository: AccountRepository
     val transferRepository: TransferRepository
+    val categoryRepository: CategoryRepository
 }

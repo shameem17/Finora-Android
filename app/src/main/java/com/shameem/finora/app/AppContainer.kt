@@ -5,11 +5,14 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.room.Room
 import com.shameem.finora.core.data.RoomUnitOfWork
 import com.shameem.finora.core.data.UnitOfWork
+import com.shameem.finora.screens.categories.repository.CategoryRepository
 import com.shameem.finora.screens.transaction.AccountRepository
 import com.shameem.finora.screens.transaction.TransferRepository
 import com.shameem.finora.services.date.DateService
 import com.shameem.finora.services.date.SystemDateService
+import com.shameem.finora.services.persistence.DefaultDataSeeder
 import com.shameem.finora.services.persistence.FinoraDatabase
+import com.shameem.finora.services.persistence.RoomCategoryRepository
 import com.shameem.finora.services.persistence.RoomAccountRepository
 import com.shameem.finora.services.persistence.RoomTransferRepository
 import kotlinx.coroutines.CoroutineScope
@@ -42,4 +45,13 @@ class AppContainer(context: Context) : AppDependencies {
     override val accountRepository: AccountRepository = RoomAccountRepository(database)
 
     override val transferRepository: TransferRepository = RoomTransferRepository(database)
+
+    private val roomCategoryRepository = RoomCategoryRepository(database)
+    override val categoryRepository: CategoryRepository = roomCategoryRepository
+
+    val dataSeeder = DefaultDataSeeder(
+        database,
+        appContext.getSharedPreferences("finora_seed", Context.MODE_PRIVATE),
+        onSeeded = roomCategoryRepository::invalidate,
+    )
 }

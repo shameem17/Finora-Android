@@ -1,27 +1,20 @@
 package com.shameem.finora.screens.accounts.view
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.semantics.clearAndSetSemantics
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.shameem.finora.core.designsystem.AppFontWeight
 import com.shameem.finora.core.designsystem.FinoraColors
@@ -29,8 +22,8 @@ import com.shameem.finora.core.designsystem.colorFromHex
 import com.shameem.finora.core.ui.AmountField
 import com.shameem.finora.core.ui.AppText
 import com.shameem.finora.core.ui.FormFieldRow
-import com.shameem.finora.core.ui.FormFieldTextStyle
 import com.shameem.finora.core.ui.FormSheet
+import com.shameem.finora.core.ui.FormTextEntry
 import com.shameem.finora.core.ui.LogoColorPickerCard
 import com.shameem.finora.core.ui.MenuPicker
 import com.shameem.finora.core.ui.finoraCard
@@ -89,7 +82,7 @@ private fun DetailsCard(form: AccountFormViewModel) {
             .padding(horizontal = 16.dp),
     ) {
         FormFieldRow(icon = "textformat", title = "Name") {
-            TextEntry(
+            FormTextEntry(
                 value = form.name,
                 onValueChange = { form.name = it },
                 placeholder = "e.g. City Bank",
@@ -98,7 +91,7 @@ private fun DetailsCard(form: AccountFormViewModel) {
         }
         HorizontalDivider(color = FinoraColors.Divider)
         FormFieldRow(icon = "number", title = "Account no.") {
-            TextEntry(
+            FormTextEntry(
                 value = form.number,
                 onValueChange = { form.number = it },
                 placeholder = "Optional",
@@ -115,37 +108,6 @@ private fun DetailsCard(form: AccountFormViewModel) {
                 icon = { it.symbol },
             )
         }
-    }
-}
-
-/** Right-aligned single-line text input with a placeholder, used inside [FormFieldRow]. */
-@Composable
-private fun TextEntry(
-    value: String,
-    onValueChange: (String) -> Unit,
-    placeholder: String,
-    capitalization: KeyboardCapitalization,
-) {
-    Box(Modifier.widthIn(min = 120.dp), contentAlignment = Alignment.CenterEnd) {
-        if (value.isEmpty()) {
-            AppText(
-                text = placeholder,
-                size = 15,
-                weight = AppFontWeight.SemiBold,
-                color = FinoraColors.TextTertiary,
-                textAlign = TextAlign.End,
-                modifier = Modifier.fillMaxWidth(),
-            )
-        }
-        BasicTextField(
-            value = value,
-            onValueChange = onValueChange,
-            singleLine = true,
-            textStyle = FormFieldTextStyle.copy(textAlign = TextAlign.End),
-            cursorBrush = SolidColor(FinoraColors.TextPrimary),
-            keyboardOptions = KeyboardOptions(capitalization = capitalization, imeAction = ImeAction.Next),
-            modifier = Modifier.fillMaxWidth(),
-        )
     }
 }
 
