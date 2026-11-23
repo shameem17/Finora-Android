@@ -7,6 +7,8 @@ import com.shameem.finora.core.data.RoomUnitOfWork
 import com.shameem.finora.core.data.UnitOfWork
 import com.shameem.finora.screens.cashflow.service.CashFlowDependencies
 import com.shameem.finora.screens.cashflow.service.DefaultCashFlowService
+import com.shameem.finora.screens.savings.service.DefaultSavingsService
+import com.shameem.finora.screens.savings.service.SavingsDependencies
 import com.shameem.finora.screens.categories.repository.CategoryRepository
 import com.shameem.finora.screens.transaction.AccountRepository
 import com.shameem.finora.screens.transaction.TransferRepository
@@ -16,6 +18,7 @@ import com.shameem.finora.services.persistence.DefaultDataSeeder
 import com.shameem.finora.services.persistence.FinoraDatabase
 import com.shameem.finora.services.persistence.RoomCashFlowRepository
 import com.shameem.finora.services.persistence.RoomCategoryRepository
+import com.shameem.finora.services.persistence.RoomSavingsRepository
 import com.shameem.finora.services.persistence.RoomAccountRepository
 import com.shameem.finora.services.persistence.RoomTransferRepository
 import kotlinx.coroutines.CoroutineScope
@@ -59,6 +62,14 @@ class AppContainer(context: Context) : AppDependencies {
         categories = categoryRepository,
         accounts = accountRepository,
         service = DefaultCashFlowService(cashFlowRepository, accountRepository, unitOfWork),
+    )
+
+    private val savingsRepository = RoomSavingsRepository(database)
+
+    override val savings: SavingsDependencies = SavingsDependencies(
+        savings = savingsRepository,
+        accounts = accountRepository,
+        service = DefaultSavingsService(savingsRepository, accountRepository, unitOfWork),
     )
 
     val dataSeeder = DefaultDataSeeder(

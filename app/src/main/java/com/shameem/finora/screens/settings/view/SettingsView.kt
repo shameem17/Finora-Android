@@ -25,8 +25,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Switch
-import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -43,6 +41,7 @@ import com.shameem.finora.app.AppSettings
 import com.shameem.finora.core.designsystem.AppFontWeight
 import com.shameem.finora.core.designsystem.FinoraColors
 import com.shameem.finora.core.ui.AppText
+import com.shameem.finora.core.ui.FinoraSwitch
 import com.shameem.finora.core.ui.FormSheetHost
 import com.shameem.finora.core.ui.ScreenTitle
 import com.shameem.finora.core.ui.SectionLabel
@@ -81,7 +80,7 @@ fun SettingsView(
                     title = "Loan reminders",
                     subtitle = "Local notifications for due dates",
                 ) {
-                    Switch(
+                    FinoraSwitch(
                         checked = settings.notificationsEnabled,
                         onCheckedChange = { enabled ->
                             val needsPermission = enabled &&
@@ -94,13 +93,6 @@ fun SettingsView(
                                 settings.updateNotificationsEnabled(enabled)
                             }
                         },
-                        colors = SwitchDefaults.colors(
-                            checkedTrackColor = FinoraColors.BrandSecondary,
-                            checkedThumbColor = FinoraColors.BrandPrimary,
-                            uncheckedTrackColor = FinoraColors.FillSubtle,
-                            uncheckedThumbColor = FinoraColors.TextTertiary,
-                            uncheckedBorderColor = FinoraColors.Hairline,
-                        ),
                     )
                 }
                 RowDivider()

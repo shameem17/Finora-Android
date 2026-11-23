@@ -5,7 +5,7 @@
         Finora is fully offline: no INTERNET permission is declared, and backups are
         disabled so financial data never leaves the device.
     -->
-        <!-- Local loan-due reminders only (Android 13+ runtime permission). The app has no INTERNET permission. -->
+    <!-- Local loan-due reminders only (Android 13+ runtime permission). The app has no INTERNET permission. -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
