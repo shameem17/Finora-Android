@@ -12,9 +12,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -37,6 +35,7 @@ import com.shameem.finora.core.designsystem.colorFromHex
 import com.shameem.finora.core.ui.AmountField
 import com.shameem.finora.core.ui.AppText
 import com.shameem.finora.core.ui.ColorSwatchPicker
+import com.shameem.finora.core.ui.ConfirmDeleteDialog
 import com.shameem.finora.core.ui.FormErrorBanner
 import com.shameem.finora.core.ui.FormFieldRow
 import com.shameem.finora.core.ui.FormSheet
@@ -88,25 +87,15 @@ fun CategoryFormView(
     }
 
     if (confirmDelete) {
-        AlertDialog(
-            onDismissRequest = { confirmDelete = false },
-            containerColor = FinoraColors.ScreenBackground,
-            title = { AppText("Delete this category?", size = 18, weight = AppFontWeight.Bold, color = FinoraColors.TextPrimary) },
-            text = { AppText("Existing transactions are not removed.", size = 14, color = FinoraColors.TextSecondary) },
-            confirmButton = {
-                TextButton(onClick = {
-                    confirmDelete = false
-                    form.delete()
-                    onDismiss()
-                }) {
-                    AppText("Delete", size = 15, weight = AppFontWeight.Bold, color = FinoraColors.Negative)
-                }
+        ConfirmDeleteDialog(
+            title = "Delete this category?",
+            message = "Existing transactions are not removed.",
+            onConfirm = {
+                confirmDelete = false
+                form.delete()
+                onDismiss()
             },
-            dismissButton = {
-                TextButton(onClick = { confirmDelete = false }) {
-                    AppText("Cancel", size = 15, weight = AppFontWeight.SemiBold, color = FinoraColors.TextPrimary)
-                }
-            },
+            onDismiss = { confirmDelete = false },
         )
     }
 }

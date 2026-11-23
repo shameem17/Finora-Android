@@ -12,6 +12,7 @@ import androidx.room.RoomDatabase
         AccountEntity::class,
         TransferEntity::class,
         CategoryEntity::class,
+        CashFlowEntryEntity::class,
     ],
     version = 1,
     exportSchema = true,
@@ -20,4 +21,5 @@ abstract class FinoraDatabase : RoomDatabase() {
     abstract fun accountDao(): AccountDao
     abstract fun transferDao(): TransferDao
     abstract fun categoryDao(): CategoryDao
+    abstract fun cashFlowDao(): CashFlowDao
 }

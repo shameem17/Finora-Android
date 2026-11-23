@@ -36,7 +36,12 @@ internal fun TabNavHost(
     }
 }
 
-/** Creates (or returns the retained) [ViewModel] using [create] for first-time construction. */
+/**
+ * Creates (or returns the retained) [ViewModel] using [create] for first-time construction. Pass a [key] when
+ * two screens use the same ViewModel class (e.g. the Income and Expense tabs), or they would share one instance.
+ */
 @Composable
-internal inline fun <reified VM : ViewModel> rememberViewModel(noinline create: () -> VM): VM =
-    viewModel(factory = remember { viewModelFactory { initializer { create() } } })
+internal inline fun <reified VM : ViewModel> rememberViewModel(
+    key: String? = null,
+    noinline create: () -> VM,
+): VM = viewModel(key = key, factory = remember { viewModelFactory { initializer { create() } } })

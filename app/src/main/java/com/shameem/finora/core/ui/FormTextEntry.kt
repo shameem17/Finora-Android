@@ -25,6 +25,8 @@ fun FormTextEntry(
     modifier: Modifier = Modifier,
     capitalization: KeyboardCapitalization = KeyboardCapitalization.Sentences,
     imeAction: ImeAction = ImeAction.Next,
+    /** 1 keeps the field on a single line; more lets it wrap and grow up to that many lines. */
+    maxLines: Int = 1,
 ) {
     Box(modifier.widthIn(min = 120.dp), contentAlignment = Alignment.CenterEnd) {
         if (value.isEmpty()) {
@@ -40,7 +42,8 @@ fun FormTextEntry(
         BasicTextField(
             value = value,
             onValueChange = onValueChange,
-            singleLine = true,
+            singleLine = maxLines == 1,
+            maxLines = maxLines,
             textStyle = FormFieldTextStyle.copy(textAlign = TextAlign.End),
             cursorBrush = SolidColor(FinoraColors.TextPrimary),
             keyboardOptions = KeyboardOptions(capitalization = capitalization, imeAction = imeAction),

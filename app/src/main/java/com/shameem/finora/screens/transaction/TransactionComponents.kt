@@ -1,5 +1,6 @@
 package com.shameem.finora.screens.transaction
 
+import com.shameem.finora.core.util.ReportPeriod
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -62,7 +63,7 @@ fun AccountBadge(
 /** Period total, charges and count (iOS `TransferSummaryCard`). */
 @Composable
 fun TransferSummaryCard(
-    period: TransferPeriod,
+    period: ReportPeriod,
     summary: TransferSummary,
     modifier: Modifier = Modifier,
 ) {
@@ -227,11 +228,11 @@ fun TransferRow(
 
 /** Shown when no transfer matches the selected period (iOS `EmptyTransfersView`). */
 @Composable
-fun EmptyTransfersView(period: TransferPeriod, modifier: Modifier = Modifier) {
+fun EmptyTransfersView(period: ReportPeriod, modifier: Modifier = Modifier) {
     EmptyStateCard(
         icon = "arrow.left.arrow.right.circle",
         title = "No transfers yet",
-        message = if (period == TransferPeriod.All) {
+        message = if (period == ReportPeriod.All) {
             "Move money between your accounts and it will show up here."
         } else {
             "Nothing recorded for this period."

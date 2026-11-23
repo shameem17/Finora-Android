@@ -2,6 +2,8 @@ package com.shameem.finora.app
 
 import com.shameem.finora.coordinator.Coordinator
 import com.shameem.finora.screens.accounts.coordinator.AccountsCoordinator
+import com.shameem.finora.screens.cashflow.coordinator.CashFlowCoordinator
+import com.shameem.finora.screens.categories.model.CategoryKind
 import com.shameem.finora.screens.categories.coordinator.CategoriesCoordinator
 import com.shameem.finora.screens.placeholder.PlaceholderCoordinator
 import com.shameem.finora.screens.transaction.TransactionCoordinator
@@ -28,6 +30,8 @@ enum class AppTab(
         Transaction -> TransactionCoordinator(dependencies)
         Accounts -> AccountsCoordinator(dependencies)
         Categories -> CategoriesCoordinator(dependencies)
+        Income -> CashFlowCoordinator(CategoryKind.Income, dependencies)
+        Expense -> CashFlowCoordinator(CategoryKind.Expense, dependencies)
         // Not ported yet: replaced one by one as each feature lands.
         else -> PlaceholderCoordinator(title = title, symbol = symbol)
     }

@@ -2,6 +2,7 @@ package com.shameem.finora.app
 
 import android.content.Context
 import com.shameem.finora.core.data.UnitOfWork
+import com.shameem.finora.screens.cashflow.service.CashFlowDependencies
 import com.shameem.finora.screens.categories.repository.CategoryRepository
 import com.shameem.finora.screens.transaction.AccountRepository
 import com.shameem.finora.screens.transaction.TransferRepository
@@ -23,4 +24,5 @@ interface AppDependencies {
     val accountRepository: AccountRepository
     val transferRepository: TransferRepository
     val categoryRepository: CategoryRepository
+    val cashFlow: CashFlowDependencies
 }

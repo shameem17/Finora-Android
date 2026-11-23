@@ -1,5 +1,6 @@
 package com.shameem.finora.screens.transaction
 
+import com.shameem.finora.core.util.ReportPeriod
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -70,7 +71,7 @@ fun TransactionView(
             verticalArrangement = Arrangement.spacedBy(20.dp),
         ) {
             PillPicker(
-                options = TransferPeriod.entries,
+                options = ReportPeriod.entries,
                 selection = state.period,
                 onSelectionChange = model::setPeriod,
             )
@@ -87,7 +88,7 @@ fun TransactionView(
 }
 
 @Composable
-private fun TransferHistory(sections: List<TransferSection>, period: TransferPeriod) {
+private fun TransferHistory(sections: List<TransferSection>, period: ReportPeriod) {
     if (sections.isEmpty()) {
         EmptyTransfersView(period = period)
         return

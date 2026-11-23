@@ -1,5 +1,6 @@
 package com.shameem.finora.screens.transaction
 
+import com.shameem.finora.core.util.ReportPeriod
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shameem.finora.core.data.ImmediateUnitOfWork
@@ -17,7 +18,7 @@ import java.util.Locale
 
 /** Everything the Transactions screen renders. */
 data class TransactionUiState(
-    val period: TransferPeriod = TransferPeriod.Month,
+    val period: ReportPeriod = ReportPeriod.Month,
     val summary: TransferSummary = TransferSummary.Empty,
     val sections: List<TransferSection> = emptyList(),
 )
@@ -25,7 +26,7 @@ data class TransactionUiState(
 interface TransactionViewModelProtocol {
     val state: StateFlow<TransactionUiState>
 
-    fun setPeriod(period: TransferPeriod)
+    fun setPeriod(period: ReportPeriod)
     fun load()
 
     /** Builds a blank form pre-filled with the current accounts. */
@@ -51,7 +52,7 @@ class TransactionViewModel(
         load()
     }
 
-    override fun setPeriod(period: TransferPeriod) {
+    override fun setPeriod(period: ReportPeriod) {
         _state.update { it.copy(period = period) }
         rebuild()
     }
