@@ -3,6 +3,7 @@ package com.shameem.finora.app
 import android.content.Context
 import com.shameem.finora.core.data.UnitOfWork
 import com.shameem.finora.screens.cashflow.service.CashFlowDependencies
+import com.shameem.finora.screens.loan.service.LoanDependencies
 import com.shameem.finora.screens.savings.service.SavingsDependencies
 import com.shameem.finora.screens.categories.repository.CategoryRepository
 import com.shameem.finora.screens.transaction.AccountRepository
@@ -27,4 +28,5 @@ interface AppDependencies {
     val categoryRepository: CategoryRepository
     val cashFlow: CashFlowDependencies
     val savings: SavingsDependencies
+    val loan: LoanDependencies
 }

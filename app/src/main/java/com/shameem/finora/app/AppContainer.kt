@@ -7,6 +7,8 @@ import com.shameem.finora.core.data.RoomUnitOfWork
 import com.shameem.finora.core.data.UnitOfWork
 import com.shameem.finora.screens.cashflow.service.CashFlowDependencies
 import com.shameem.finora.screens.cashflow.service.DefaultCashFlowService
+import com.shameem.finora.screens.loan.service.DefaultLoanService
+import com.shameem.finora.screens.loan.service.LoanDependencies
 import com.shameem.finora.screens.savings.service.DefaultSavingsService
 import com.shameem.finora.screens.savings.service.SavingsDependencies
 import com.shameem.finora.screens.categories.repository.CategoryRepository
@@ -18,6 +20,9 @@ import com.shameem.finora.services.persistence.DefaultDataSeeder
 import com.shameem.finora.services.persistence.FinoraDatabase
 import com.shameem.finora.services.persistence.RoomCashFlowRepository
 import com.shameem.finora.services.persistence.RoomCategoryRepository
+import com.shameem.finora.services.persistence.RoomLoanRepository
+import com.shameem.finora.services.persistence.RoomPersonRepository
+import com.shameem.finora.services.reminders.AlarmLoanReminderScheduler
 import com.shameem.finora.services.persistence.RoomSavingsRepository
 import com.shameem.finora.services.persistence.RoomAccountRepository
 import com.shameem.finora.services.persistence.RoomTransferRepository
@@ -71,6 +76,30 @@ class AppContainer(context: Context) : AppDependencies {
         accounts = accountRepository,
         service = DefaultSavingsService(savingsRepository, accountRepository, unitOfWork),
     )
+
+    private val reminderScheduler = AlarmLoanReminderScheduler(appContext, isEnabled = { settings.notificationsEnabled })
+
+    private val personRepository = RoomPersonRepository(database)
+    private val loanRepository = RoomLoanRepository(database)
+
+    override val loan: LoanDependencies = LoanDependencies(
+        loans = loanRepository,
+        people = personRepository,
+        accounts = accountRepository,
+        service = DefaultLoanService(
+            loans = loanRepository,
+            people = personRepository,
+            accounts = accountRepository,
+            reminders = reminderScheduler,
+            unitOfWork = unitOfWork,
+        ),
+    )
+
+    /** Rebuilds every loan's reminder alarm (they are lost on reboot). */
+    suspend fun resyncLoanReminders() {
+        val people = personRepository.fetchPeople().associateBy { it.id }
+        loanRepository.fetchLoans().forEach { reminderScheduler.sync(it, people[it.personId]) }
+    }
 
     val dataSeeder = DefaultDataSeeder(
         database,
