@@ -35,7 +35,7 @@ enum class AppTab(
         Categories -> CategoriesCoordinator(dependencies)
         Settings -> SettingsCoordinator(dependencies)
         Savings -> SavingsCoordinator(dependencies)
-        Loans -> LoanCoordinator(dependencies)
+        Loan -> LoanCoordinator(dependencies)
         Income -> CashFlowCoordinator(CategoryKind.Income, dependencies)
         Expense -> CashFlowCoordinator(CategoryKind.Expense, dependencies)
         // Not ported yet: replaced one by one as each feature lands.
