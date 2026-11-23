@@ -7,6 +7,7 @@ import com.shameem.finora.screens.categories.model.CategoryKind
 import com.shameem.finora.screens.categories.coordinator.CategoriesCoordinator
 import com.shameem.finora.screens.savings.coordinator.SavingsCoordinator
 import com.shameem.finora.screens.settings.coordinator.SettingsCoordinator
+import com.shameem.finora.screens.loan.coordinator.LoanCoordinator
 import com.shameem.finora.screens.placeholder.PlaceholderCoordinator
 import com.shameem.finora.screens.transaction.TransactionCoordinator
 
@@ -34,6 +35,7 @@ enum class AppTab(
         Categories -> CategoriesCoordinator(dependencies)
         Settings -> SettingsCoordinator(dependencies)
         Savings -> SavingsCoordinator(dependencies)
+        Loans -> LoanCoordinator(dependencies)
         Income -> CashFlowCoordinator(CategoryKind.Income, dependencies)
         Expense -> CashFlowCoordinator(CategoryKind.Expense, dependencies)
         // Not ported yet: replaced one by one as each feature lands.

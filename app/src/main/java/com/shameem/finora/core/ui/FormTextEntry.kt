@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -27,6 +28,7 @@ fun FormTextEntry(
     imeAction: ImeAction = ImeAction.Next,
     /** 1 keeps the field on a single line; more lets it wrap and grow up to that many lines. */
     maxLines: Int = 1,
+    keyboardType: KeyboardType = KeyboardType.Text,
 ) {
     Box(modifier.widthIn(min = 120.dp), contentAlignment = Alignment.CenterEnd) {
         if (value.isEmpty()) {
@@ -46,7 +48,7 @@ fun FormTextEntry(
             maxLines = maxLines,
             textStyle = FormFieldTextStyle.copy(textAlign = TextAlign.End),
             cursorBrush = SolidColor(FinoraColors.TextPrimary),
-            keyboardOptions = KeyboardOptions(capitalization = capitalization, imeAction = imeAction),
+            keyboardOptions = KeyboardOptions(capitalization = capitalization, imeAction = imeAction, keyboardType = keyboardType),
             modifier = Modifier.fillMaxWidth(),
         )
     }
