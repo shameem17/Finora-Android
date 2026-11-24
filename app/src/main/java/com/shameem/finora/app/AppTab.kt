@@ -8,7 +8,7 @@ import com.shameem.finora.screens.categories.coordinator.CategoriesCoordinator
 import com.shameem.finora.screens.savings.coordinator.SavingsCoordinator
 import com.shameem.finora.screens.settings.coordinator.SettingsCoordinator
 import com.shameem.finora.screens.loan.coordinator.LoanCoordinator
-import com.shameem.finora.screens.placeholder.PlaceholderCoordinator
+import com.shameem.finora.screens.home.coordinator.HomeCoordinator
 import com.shameem.finora.screens.transaction.TransactionCoordinator
 
 /** The app's sections, in tab order (iOS `AppTab`). Each owns a coordinator and its own back stack. */
@@ -30,6 +30,7 @@ enum class AppTab(
     val selectedSymbol: String get() = "$symbol.fill"
 
     fun coordinator(dependencies: AppDependencies): Coordinator = when (this) {
+        Home -> HomeCoordinator(dependencies)
         Transaction -> TransactionCoordinator(dependencies)
         Accounts -> AccountsCoordinator(dependencies)
         Categories -> CategoriesCoordinator(dependencies)
@@ -38,8 +39,6 @@ enum class AppTab(
         Loan -> LoanCoordinator(dependencies)
         Income -> CashFlowCoordinator(CategoryKind.Income, dependencies)
         Expense -> CashFlowCoordinator(CategoryKind.Expense, dependencies)
-        // Not ported yet: replaced one by one as each feature lands.
-        else -> PlaceholderCoordinator(title = title, symbol = symbol)
     }
 
     companion object {
